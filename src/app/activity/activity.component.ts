@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ItemComponent } from '../item/item.component';
 
 @Component({
   selector: 'app-activity',
