@@ -16,4 +16,7 @@ export class LoginComponent {
   public openRegister(): void {
     this.router.navigateByUrl("register");
   }
+  public openActivity(): void {
+    this.router.navigateByUrl("activ");
+  }
 }
