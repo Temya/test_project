@@ -2,5 +2,6 @@ import { Routes } from "@angular/router";
 
 export const appRoutes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "login"},
-    {path: "login", loadComponent: () => import("./login/login.component").then((i) => i.LoginComponent)}
+    {path: "login", loadComponent: () => import("./login/login.component").then((i) => i.LoginComponent)},
+    {path: "register", loadComponent: () => import("./registration/registration.component").then((i) => i.RegistrationComponent)}
 ]

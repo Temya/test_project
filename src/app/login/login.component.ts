@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,5 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  constructor( private readonly router: Router){
 
+  }
+  public openRegister(): void {
+    this.router.navigateByUrl("register");
+  }
 }
