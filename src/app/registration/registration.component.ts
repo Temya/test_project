@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -13,21 +13,23 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class RegistrationComponent {
 
-  public formReg = new FormGroup({
-    login: new FormControl(),
-    password: new FormControl(),
-    confirmPassword: new FormControl(),
-    initials: new FormControl(),
-    email: new FormControl()
-  })
+  public formReg?: FormGroup
 
-  constructor( private readonly router: Router){  }
+  constructor( private readonly router: Router, private readonly fb: FormBuilder){ 
+    this.formReg = this.fb.group({
+    login: this.fb.control(""),
+    password: this.fb.control(""),
+    confirmPassword: this.fb.control(""),
+    initials: this.fb.control(""),
+    email: this.fb.control("")
+    })
+   }
   public openLogin(): void {
     this.router.navigateByUrl("login");
   }
 
   public contrRegistration(): void{
-    console.log(this.formReg.value)
+    console.log(this.formReg?.value)
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { __values } from 'tslib';
 
 @Component({
@@ -14,14 +14,14 @@ import { __values } from 'tslib';
 })
 export class LoginComponent {
 
-  public formLog = new FormGroup({
-    login: new FormControl(),
-    password: new FormControl()
-  })
+  public formLog?: FormGroup
 
 
-  constructor(private readonly router: Router){
-    
+  constructor(private readonly router: Router, private readonly fb: FormBuilder){
+    this.formLog = this.fb.group({
+      login: this.fb.control(""),
+      password: this.fb.control("")
+    })
   }
   public openRegister(): void {
     this.router.navigateByUrl("register");
@@ -32,8 +32,8 @@ export class LoginComponent {
   }
 
   public contrLogin(): void {
-    this.formLog.patchValue({ login: 'Artem', password: '123123123'}),
-    console.log(this.formLog.value)
+    this.formLog?.patchValue({ login: 'Artem', password: '123123123'}),
+    console.log(this.formLog?.value)
   }
 
 }
