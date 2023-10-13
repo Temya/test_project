@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,7 @@ export class LoginComponent {
   }
 
   public contrLogin(): void {
+    this.formLog.patchValue({ login: 'Artem', password: '123123123'}),
     console.log(this.formLog.value)
   }
 
