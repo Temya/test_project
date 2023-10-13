@@ -1,25 +1,28 @@
-    <h1>ACCOUNT REGISTRATION</h1>
-    <div class="text">
-    <h4>USER NAME</h4>
-    <input type="text">
+    <div [formGroup]="formReg">
+        <h1>ACCOUNT REGISTRATION</h1>
+        <div class="text">
+        <h4>USER NAME</h4>
+        <input type="text" formControlName="login">
+        </div>
+        <div class="text">
+        <h4>PASSWORD</h4>
+        <input type="password" formControlName="password">
+        </div>
+        <div class="text">
+        <h4>CONFIRM PASSWORD</h4>
+        <input type="password" formControlName="confirmPassword">
+        </div>    
+        <div class="text">
+        <h4>INITIALS</h4>
+        <input type="text" formControlName="initials">
+        </div>
+        <div class="text">
+        <h4>EMAIL</h4>
+        <input type="text" formControlName="email">
+        </div>   
+        <div class="down">
+        <button (click)="contrRegistration()" class="btn">Register</button>
+        <button (click)="openLogin()">Login</button>
+        </div>
     </div>
-    <div class="text">
-    <h4>PASSWORD</h4>
-    <input type="password">
-    </div>
-    <div class="text">
-    <h4>COFIRM PASSWORD</h4>
-    <input type="password">
-    </div>    
-    <div class="text">
-    <h4>INITIALS</h4>
-    <input type="text">
-    </div>
-    <div class="text">
-    <h4>EMAIL</h4>
-    <input type="text">
-    </div>   
-    <div class="down">
-    <button class="btn">Register</button>
-    <button (click)="openLogin()">Login</button>
-    </div>
+    
