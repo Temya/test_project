@@ -10,7 +10,7 @@
 }
 .text {
     display: flex;
-    width: 70%;
+    width: 100%;
     align-items: flex-start;
     justify-content: space-evenly;
     flex-direction: column;
@@ -20,10 +20,12 @@ input {
     width: 100%;
 }
 .down {
-    width: 70%;
+    margin-top: 5px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
 
 
 button {
@@ -67,3 +69,5 @@ button:hover {
 	background-color: #6c87b5;
 	pointer-events: none;
 }
+
+

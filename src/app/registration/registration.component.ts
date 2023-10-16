@@ -17,7 +17,7 @@ export class RegistrationComponent {
 
   constructor( private readonly router: Router, private readonly fb: FormBuilder){ 
     this.formRegistr = this.fb.group({
-      login: this.fb.control("", [Validators.required, Validators.minLength(3), Validators.maxLength(24)],),
+      login: this.fb.control("", [Validators.required, Validators.minLength(3), Validators.maxLength(24), Validators.pattern('[a-zA-Z ]*')]),
       password: this.fb.control("", Validators.required),
       confirmPassword: this.fb.control(""),
       initials: this.fb.control(""),
@@ -36,6 +36,9 @@ export class RegistrationComponent {
 
   get password() { return this.formRegistr?.get('password');}
 
+  get confirmPassword() { return this.formRegistr?.get('confirmPassword');}
+
   get email() { return this.formRegistr?.get('email');}
+
 
 }

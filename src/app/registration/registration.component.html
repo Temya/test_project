@@ -2,7 +2,7 @@
         <h1>ACCOUNT REGISTRATION</h1>
         <div class="text">
             <h4>USER NAME</h4>
-            <input type="text" id="login" formControlName="login" required>
+            <input type="text" formControlName="login">
         </div>
         <div *ngIf="login?.invalid && (login?.dirty || login?.touched)">
             <div *ngIf="login?.errors?.['required']">
@@ -19,10 +19,18 @@
             <h4>PASSWORD</h4>
             <input type="password" formControlName="password">
         </div>
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+            <div *ngIf="password?.errors?.['required']">
+                Password is required.
+            </div>
+        </div>
         <div class="text">
             <h4>CONFIRM PASSWORD</h4>
             <input type="password" formControlName="confirmPassword">
-        </div>    
+        </div>
+            <div *ngIf="password?.value != confirmPassword?.value">
+                Passwords don't match
+            </div>  
         <div class="text">
             <h4>INITIALS</h4>
             <input type="text" formControlName="initials">
@@ -30,6 +38,11 @@
         <div class="text">
             <h4>EMAIL</h4>
             <input type="text" formControlName="email">
+        </div>
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div *ngIf="email?.errors?.['required']">
+                Email is required.
+            </div>
         </div>   
         <div class="down">
             <button (click)="contrRegistration()" class="btn">Register</button>
