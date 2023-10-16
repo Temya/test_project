@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ItemComponent } from '../item/item.component';
+import { ActivityItem } from './activity';
+import { TmplAstBoundAttribute } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-activity',
@@ -10,9 +12,24 @@ import { ItemComponent } from '../item/item.component';
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
+
 export class ActivityComponent {
+
+  public activity: ActivityItem[] = [];  
+
   constructor( private readonly router: Router){
 
+    this.activity = [];
+    for(let h = 0; h < 10; h++){
+      this.activity.push({
+        name: "Bob",
+        description: "Blablablablabal",
+        time: "10.11.23",
+        isDone: true
+      })
+    }    
+
   }
+  
   
 }

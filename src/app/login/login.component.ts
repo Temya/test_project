@@ -22,6 +22,9 @@ export class LoginComponent {
   public isPasswordShown = false;
 
   // public formLogin?: FormGroup;
+  get login() { return this.formLogin?.get('login');}
+
+  get password() { return this.formLogin?.get('password');}  
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder){
   }
@@ -38,9 +41,7 @@ export class LoginComponent {
     console.log(this.formLogin?.value)
   }
 
-  get login() { return this.formLogin?.get('login');}
-
-  get password() { return this.formLogin?.get('password');}  
+  
 
 
 }

@@ -15,6 +15,14 @@ export class RegistrationComponent {
 
   public formRegistr?: FormGroup
 
+  get login() { return this.formRegistr?.get('login');}
+
+  get password() { return this.formRegistr?.get('password');}
+
+  get confirmPassword() { return this.formRegistr?.get('confirmPassword');}
+
+  get email() { return this.formRegistr?.get('email');}
+
   constructor( private readonly router: Router, private readonly fb: FormBuilder){ 
     this.formRegistr = this.fb.group({
       login: this.fb.control("", [Validators.required, Validators.minLength(3), Validators.maxLength(24), Validators.pattern('[a-zA-Z ]*')]),
@@ -32,13 +40,7 @@ export class RegistrationComponent {
     console.log(this.formRegistr?.value)
   }
 
-  get login() { return this.formRegistr?.get('login');}
-
-  get password() { return this.formRegistr?.get('password');}
-
-  get confirmPassword() { return this.formRegistr?.get('confirmPassword');}
-
-  get email() { return this.formRegistr?.get('email');}
+  
 
 
 }
