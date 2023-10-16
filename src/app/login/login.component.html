@@ -1,16 +1,16 @@
-    <div *ngIf="formLog" [formGroup]="formLog">
+    <div *ngIf="formLogin" [formGroup]="formLogin">
         <h1>ACCOUNT LOGIN</h1>
         <div class="text">
-        <h4>USER NAME</h4>
-        <input type="text" formControlName="login">
+            <h4>USER NAME</h4>
+                <input type="text" formControlName="login">
         </div>
-        <div class="text">
-        <h4>PASSWORD</h4>
-        <input type="password" formControlName="password">
+            <div class="text">
+            <h4>PASSWORD</h4>
+            <input type="password" formControlName="password">
         </div>  
         <div class="down">
-        <button (click)="contrLogin()" class="btn">LOGIN</button>
-        <button (click)="openRegister()">Registrations</button>
+            <button (click)="testLogin()" class="btn">LOGIN</button>
+            <button (click)="openRegister()">Registrations</button>
         </div>
     </div>
     

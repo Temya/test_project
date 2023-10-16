@@ -14,11 +14,11 @@ import { __values } from 'tslib';
 })
 export class LoginComponent {
 
-  public formLog?: FormGroup
+  public formLogin?: FormGroup
 
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder){
-    this.formLog = this.fb.group({
+    this.formLogin = this.fb.group({
       login: this.fb.control(""),
       password: this.fb.control("")
     })
@@ -31,9 +31,9 @@ export class LoginComponent {
     this.router.navigateByUrl("activ");
   }
 
-  public contrLogin(): void {
-    this.formLog?.patchValue({ login: 'Artem', password: '123123123'}),
-    console.log(this.formLog?.value)
+  public testLogin(): void {
+    this.formLogin?.patchValue({ login: 'Artem', password: '123123123'}),
+    console.log(this.formLogin?.value)
   }
 
 }

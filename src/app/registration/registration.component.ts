@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -13,15 +13,15 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 })
 export class RegistrationComponent {
 
-  public formReg?: FormGroup
+  public formRegistr?: FormGroup
 
   constructor( private readonly router: Router, private readonly fb: FormBuilder){ 
-    this.formReg = this.fb.group({
-    login: this.fb.control(""),
-    password: this.fb.control(""),
-    confirmPassword: this.fb.control(""),
-    initials: this.fb.control(""),
-    email: this.fb.control("")
+    this.formRegistr = this.fb.group({
+      login: this.fb.control("", [Validators.required, Validators.minLength(3), Validators.maxLength(24)],),
+      password: this.fb.control("", Validators.required),
+      confirmPassword: this.fb.control(""),
+      initials: this.fb.control(""),
+      email: this.fb.control("", Validators.required)
     })
    }
   public openLogin(): void {
@@ -29,7 +29,13 @@ export class RegistrationComponent {
   }
 
   public contrRegistration(): void{
-    console.log(this.formReg?.value)
+    console.log(this.formRegistr?.value)
   }
+
+  get login() { return this.formRegistr?.get('login');}
+
+  get password() { return this.formRegistr?.get('password');}
+
+  get email() { return this.formRegistr?.get('email');}
 
 }
