@@ -24,9 +24,9 @@ export class LoginComponent {
   constructor(private readonly router: Router, private readonly fb: FormBuilder){
   }
 
-  get login(): any { return this.formLogin?.get("login");}
+  get login(): any { return this.formLogin.get("login");}
 
-  get password(): any { return this.formLogin?.get("password");}  
+  get password(): any { return this.formLogin.get("password");}  
 
   
   public openRegister(): void {

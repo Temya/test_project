@@ -1,25 +1,31 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Router } from "@angular/router";
+import { ActivitiesEditComponent } from "../activities-edit/activities-edit.component";
 import { ActivityItem } from "./activity";
 
 
 @Component({
   selector: "app-activity",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ActivitiesEditComponent],
   templateUrl: "./activity.component.html",
   styleUrls: ["./activity.component.scss"]
 })
 
 export class ActivityComponent {
+  // @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  // @Input() public tmp?: number;
+  @Output() public addEvent = new EventEmitter();
+  public activities: ActivityItem[] = [];  
 
-  public activity: ActivityItem[] = [];  
+  public status = true;
 
   constructor(private readonly router: Router){
 
-    for (let h = 0; h < 10; h++){
-      this.activity.push({
+    for (let i = 0; i < 10; i++){
+      this.activities.push({
+        id: i,
         name: "Bob",
         description: "Blablablablabal",
         time: "10.11.2023",
@@ -28,9 +34,24 @@ export class ActivityComponent {
     }    
   }
   
-  // public delete(): void
-  // {
+  public delete(activity: any): void {
+    this.activities = this.activities.filter((n) => n.id !== activity.id);
+    // this.eventEmitter.emit();
+  }
 
-  // }
+  public create(): void{
+    this.activities.push({
+        id: this.activities.length + 1,
+        name: "Edit",
+        description: "Edit",
+        time: "Edit",
+        isDone: false
+    });
+
+  }
   
+  public edit(): void {
+    this.status = !this.status;
+  }
+
 }

@@ -1,0 +1,19 @@
+<div *ngIf="formEdit" [formGroup]="formEdit">
+    <div class="text">
+        <h1>Name</h1>
+        <input type="text" formControlName="name">
+    </div>
+    <div class="text">
+        <h1>Description</h1>
+        <input type="text" formControlName="description">
+    </div>
+    <div class="text">
+        <h1>Time</h1>
+        <input type="text" formControlName="time">
+    </div>
+    <div class="text">
+        <h1>IsDone</h1>
+        <input type="text" formControlName="isDone">
+    </div>
+        <button class="btn" >Done</button>
+</div>
