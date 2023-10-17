@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ActivityItem } from "../activity/activity";
 
@@ -12,26 +12,38 @@ import { ActivityItem } from "../activity/activity";
   templateUrl: "./activities-edit.component.html",
   styleUrls: ["./activities-edit.component.scss"]
 })
-export class ActivitiesEditComponent {
+export class ActivitiesEditComponent implements OnInit {
 
-  @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
-  @Input() public tmp?: any;
+  // @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  @Input() public activity?: ActivityItem;
+
   
-  public formEdit = this.fb.group({
-    name: this.fb.control("", Validators.required),
-    description: this.fb.control("", Validators.required),
-    time: this.fb.control("", Validators.required),
-    isDone: this.fb.control("", Validators.required),
-  });
+  
+  public formEdit?: FormGroup;
+
+
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder){}
 
-  get name(): any { return this.formEdit.get("login");}
+  get name(): any { return this.formEdit?.get("name");}
 
-  get description(): any { return this.formEdit.get("password");}
+  get description(): any { return this.formEdit?.get("description");}
   
-  get time(): any { return this.formEdit.get("login");}
+  get time(): any { return this.formEdit?.get("time");}
 
-  get isDone(): any { return this.formEdit.get("password");} 
+  get isDone(): any { return this.formEdit?.get("isDone");} 
+  
+  public ngOnInit(): void {
+    this.formEdit = this.fb.group({
+      name: this.fb.control(this.activity?.name, Validators.required),
+      description: this.fb.control(this.activity?.description, Validators.required),
+      time: this.fb.control(this.activity?.time, Validators.required),
+      isDone: this.fb.control(this.activity?.isDone, Validators.required),
+    });
+  }
+
+  public done(): void {
+    console.log(this.activity);
+  }
 
 }

@@ -20,12 +20,12 @@
             <td>{{item.description}}</td>
             <td>{{item.time}}</td>
             <td>{{item.isDone}}</td>
-            <td><button class="btn" (click)="edit()">Edit</button></td>
+            <td><button class="btn" (click)="edit(item)">Edit</button></td>
             <td><button class="btn" (click)="delete(item)">Delete</button></td>
         </tr>
     </tbody>    
  </table>
- <app-activities-edit *ngIf="status === false" [tmp]="activities" (eventEmitter)="upCase($event)"></app-activities-edit>
+ <app-activities-edit *ngIf="status === false" [activity]="selectActivity"></app-activities-edit>
  <button class="btn" (click)="create()">
         Create new activity
  </button> 

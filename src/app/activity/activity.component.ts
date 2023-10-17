@@ -15,11 +15,12 @@ import { ActivityItem } from "./activity";
 
 export class ActivityComponent {
 
-  @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  // @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
   @Input() public tmp?: any;
   public activities: ActivityItem[] = [];  
 
   public status = true;
+  public selectActivity?: ActivityItem;
 
   constructor(private readonly router: Router){
 
@@ -37,7 +38,6 @@ export class ActivityComponent {
   
   public delete(activity: any): void {
     this.activities = this.activities.filter((n) => n.id !== activity.id);
-    // this.eventEmitter.emit();
   }
 
   public create(): void{
@@ -51,8 +51,9 @@ export class ActivityComponent {
 
   }
   
-  public edit(): void {
+  public edit(activity: ActivityItem): void {
     this.status = !this.status;
+    this.selectActivity = activity;
   }
 
 }
