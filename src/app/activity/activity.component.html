@@ -1,15 +1,19 @@
  <h1>LIST OF NOTES</h1>
  <table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Time</th>
-        <th>IsDone</th>
-    </tr>
-    <tr *ngFor="let item of activity">
-        <td>{{item.name}}</td>
-        <td>{{item.description}}</td>
-        <td>{{item.time}}</td>
-        <td>{{item.isDone}}</td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>IsDone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of activity">
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.time}}</td>
+            <td>{{item.isDone}}</td>
+        </tr>
+    </tbody>    
  </table>

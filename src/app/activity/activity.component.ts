@@ -19,12 +19,11 @@ export class ActivityComponent {
 
   constructor( private readonly router: Router){
 
-    this.activity = [];
     for(let h = 0; h < 10; h++){
       this.activity.push({
         name: "Bob",
         description: "Blablablablabal",
-        time: "10.11.23",
+        time: "10.11.2023",
         isDone: true
       })
     }    
