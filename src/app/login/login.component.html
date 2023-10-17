@@ -11,7 +11,7 @@
         </div>
             <div class="text">
             <h4>PASSWORD</h4>
-            <input [type]="isPasswordShown ? 'text' : 'password' " formControlName="password">
+            <input formControlName="password" [type]="isPasswordShown ? 'text' : 'password' ">
             <button href="" (click)="isPasswordShown = !isPasswordShown">Показать пароль</button>
         </div>
         <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
@@ -20,7 +20,7 @@
             </div>
         </div>  
         <div class="down">
-            <button (click)="testLogin()" class="btn">LOGIN</button>
+            <button class="btn">LOGIN</button>
             <button (click)="openRegister()">Registrations</button>
         </div>
     </div>

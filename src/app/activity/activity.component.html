@@ -6,6 +6,12 @@
             <th>Description</th>
             <th>Time</th>
             <th>IsDone</th>
+            <th>
+                Edit activity
+            </th>
+            <th>
+                Delete activity
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +20,11 @@
             <td>{{item.description}}</td>
             <td>{{item.time}}</td>
             <td>{{item.isDone}}</td>
+            <td><button class="btn">Edit</button></td>
+            <td><button class="btn">Delete</button></td>
         </tr>
     </tbody>    
  </table>
+ <button class="btn">
+        Create new activity
+ </button> 
