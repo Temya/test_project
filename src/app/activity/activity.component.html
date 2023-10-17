@@ -25,7 +25,7 @@
         </tr>
     </tbody>    
  </table>
- <app-activities-edit *ngIf="status === false"></app-activities-edit>
+ <app-activities-edit *ngIf="status === false" [tmp]="activities" (eventEmitter)="upCase($event)"></app-activities-edit>
  <button class="btn" (click)="create()">
         Create new activity
  </button> 

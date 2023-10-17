@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ActivityItem } from "../activity/activity";
 
 @Component({
   selector: "app-activities-edit",
@@ -13,6 +14,9 @@ import { Router } from "@angular/router";
 })
 export class ActivitiesEditComponent {
 
+  @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  @Input() public tmp?: any;
+  
   public formEdit = this.fb.group({
     name: this.fb.control("", Validators.required),
     description: this.fb.control("", Validators.required),

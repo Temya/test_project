@@ -14,9 +14,9 @@ import { ActivityItem } from "./activity";
 })
 
 export class ActivityComponent {
-  // @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
-  // @Input() public tmp?: number;
-  @Output() public addEvent = new EventEmitter();
+
+  @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  @Input() public tmp?: any;
   public activities: ActivityItem[] = [];  
 
   public status = true;
@@ -33,6 +33,7 @@ export class ActivityComponent {
       });
     }    
   }
+  
   
   public delete(activity: any): void {
     this.activities = this.activities.filter((n) => n.id !== activity.id);
