@@ -20,8 +20,9 @@ export class ActivitiesCreateComponent implements OnInit {
     
   }
 
-  public createActivity(item: ActivityItem): void{
-    this.service.createActivity(item);
+  public createActivity(): void{
+    this.activity = this.formCreate.getRawValue();
+    this.service.createActivity(this.activity);
   }
 
   public ngOnInit(): void {
@@ -31,7 +32,7 @@ export class ActivitiesCreateComponent implements OnInit {
       description: this.fb.control("", Validators.required),
       time: this.fb.control("", Validators.required),
       isDone: this.fb.control("", Validators.required),
-    });
+    }); 
   }
 
 }
