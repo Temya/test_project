@@ -1,5 +1,5 @@
  <h1>LIST OF NOTES</h1>
- <table *ngIf="status === true">
+ <table *ngIf="mode === 'DEFAULT'" class="items">
     <thead>
         <tr>
             <th>Name</th>
@@ -25,8 +25,8 @@
         </tr>
     </tbody>    
  </table>
- <app-activities-edit *ngIf="status === false" [activity]="selectActivity"></app-activities-edit>
- <button class="btn" (click)="create()">
-        Create new activity
- </button> 
+ <button *ngIf="mode === 'DEFAULT'" class="btn" (click)="create()">
+    Create new activity
+</button> 
+ <app-activities-edit *ngIf="mode === 'EDIT'" [activity]="selectActivity" (eventEmitter)="updateActivity($event)"></app-activities-edit>
  <!-- <app-activity [item]="" (eventEmitter)="tmp($event)"></app-activity> -->

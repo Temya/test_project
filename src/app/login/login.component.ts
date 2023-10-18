@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -24,9 +24,13 @@ export class LoginComponent {
   constructor(private readonly router: Router, private readonly fb: FormBuilder){
   }
 
-  get login(): any { return this.formLogin.get("login");}
+  get login(): AbstractControl | null | undefined {
+    return this.formLogin.get("login");
+  }
 
-  get password(): any { return this.formLogin.get("password");}  
+  get password(): AbstractControl | null | undefined {
+    return this.formLogin.get("password");
+  }  
 
   
   public openRegister(): void {

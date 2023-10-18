@@ -14,8 +14,8 @@ import { ActivityItem } from "../activity/activity";
 })
 export class ActivitiesEditComponent implements OnInit {
 
-  // @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
-  @Input() public activity?: ActivityItem;
+  @Output() public eventEmitter: EventEmitter<ActivityItem> = new EventEmitter<ActivityItem>();
+  @Input() public activity?: ActivityItem; 
 
   
   
@@ -24,17 +24,10 @@ export class ActivitiesEditComponent implements OnInit {
 
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder){}
-
-  get name(): any { return this.formEdit?.get("name");}
-
-  get description(): any { return this.formEdit?.get("description");}
-  
-  get time(): any { return this.formEdit?.get("time");}
-
-  get isDone(): any { return this.formEdit?.get("isDone");} 
   
   public ngOnInit(): void {
     this.formEdit = this.fb.group({
+      id: this.fb.control(this.activity?.id, Validators.required),
       name: this.fb.control(this.activity?.name, Validators.required),
       description: this.fb.control(this.activity?.description, Validators.required),
       time: this.fb.control(this.activity?.time, Validators.required),
@@ -42,8 +35,10 @@ export class ActivitiesEditComponent implements OnInit {
     });
   }
 
-  public done(): void {
-    console.log(this.activity);
+  public save(): void {
+    this.activity = this.formEdit?.getRawValue();
+    this.eventEmitter.emit(this.activity);
   }
+
 
 }

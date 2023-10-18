@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -25,13 +25,21 @@ export class RegistrationComponent {
     });
    }
 
-  get login(): any { return this.formRegistr?.get("login");}
+  get login(): AbstractControl | null | undefined {
+    return this.formRegistr?.get("login");
+  }
 
-  get password(): any { return this.formRegistr?.get("password");}
+  get password(): AbstractControl | null | undefined {
+    return this.formRegistr?.get("password");
+  }
 
-  get confirmPassword(): any { return this.formRegistr?.get("confirmPassword");}
+  get confirmPassword(): AbstractControl | null | undefined {
+    return this.formRegistr?.get("confirmPassword");
+  }
 
-  get email(): any { return this.formRegistr?.get("email");}
+  get email(): AbstractControl | null | undefined {
+    return this.formRegistr?.get("email");
+  }
 
   public openLogin(): void {
     this.router.navigateByUrl("login");
