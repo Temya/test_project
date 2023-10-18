@@ -20,9 +20,8 @@ export class ActivitiesCreateComponent implements OnInit {
     
   }
 
-  public createActivity(): void{
-    this.activity.push();
-    this.service.createActivity(this.formCreate);
+  public createActivity(item: ActivityItem): void{
+    this.service.createActivity(item);
   }
 
   public ngOnInit(): void {
