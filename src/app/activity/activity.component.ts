@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivitiesEditComponent } from "../activities-edit/activities-edit.component";
+import { ActivitiesService } from "../activities.service";
 import { ActivityItem } from "./activity";
 
 
@@ -22,17 +23,9 @@ export class ActivityComponent {
   public selectActivity?: ActivityItem;
   public mode: "DEFAULT" | "EDIT" = "DEFAULT";
 
-  constructor(private readonly router: Router){
 
-    for (let i = 0; i < 10; i++){
-      this.activities.push({
-        id: i,
-        name: "Bob",
-        description: "Blablablablabal",
-        time: "10.11.2023",
-        isDone: true
-      });
-    }    
+  constructor(private readonly router: Router, private service: ActivitiesService){
+    this.activities = this.service.getActivities();    
   }
   
   public done(): void{
@@ -49,14 +42,7 @@ export class ActivityComponent {
   }
 
   public create(): void{
-    this.activities.push({
-        id: this.activities.length + 1,
-        name: "Edit",
-        description: "Edit",
-        time: "Edit",
-        isDone: false
-    });
-
+    this.router.navigateByUrl("create");
   }
   
   public edit(activity: ActivityItem): void {
