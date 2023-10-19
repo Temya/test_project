@@ -47,5 +47,9 @@ export class ActivitiesService {
     });
   }
 
+  public activityDelete(activity: ActivityItem): void{
+    this.activities = this.activities.filter((n) => n.id !== activity.id);
+  }
+
   
 }

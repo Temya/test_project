@@ -17,18 +17,19 @@ export class ActivityEditComponent implements OnInit{
 
   constructor(private readonly router: Router,private service: ActivitiesService, private readonly fb: FormBuilder){}
 
-  public Save(): void{
+  public save(): void{
     this.service.updateActivity(this.formEdit?.getRawValue());
     this.router.navigateByUrl("activity");
   }
   
   public ngOnInit(): void {
+    const activity = this.service.getActivityEdit();
         this.formEdit = this.fb.group({
-          id: this.fb.control(this.service.getActivityEdit().id, Validators.required),
-          name: this.fb.control(this.service.getActivityEdit().name, Validators.required),
-          description: this.fb.control(this.service.getActivityEdit().description, Validators.required),
-          time: this.fb.control(this.service.getActivityEdit().time, Validators.required),
-          isDone: this.fb.control(this.service.getActivityEdit().isDone, Validators.required),
+          id: this.fb.control(activity.id, Validators.required),
+          name: this.fb.control(activity.name, Validators.required),
+          description: this.fb.control(activity.description, Validators.required),
+          time: this.fb.control(activity.time, Validators.required),
+          isDone: this.fb.control(activity.isDone, Validators.required),
         });
       }
      

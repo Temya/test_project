@@ -27,7 +27,8 @@ export class ActivityComponent {
   }
     
   public delete(activity: ActivityItem): void {
-    this.activities = this.activities.filter((n) => n.id !== activity.id);
+    this.service.activityDelete(activity);
+    this.activities = this.service.getActivities();
   }
 
   public create(): void{
