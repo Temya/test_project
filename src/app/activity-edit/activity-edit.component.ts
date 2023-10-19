@@ -35,7 +35,7 @@ export class ActivityEditComponent implements OnInit{
           time: this.fb.control(activity.time, Validators.required),
           isDone: this.fb.control(activity.isDone, Validators.required),
         });
-      }
+  }
      
 
 }

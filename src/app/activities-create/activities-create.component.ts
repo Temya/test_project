@@ -22,14 +22,17 @@ export class ActivitiesCreateComponent implements OnInit {
   }
 
   public addActivity(): void{
-    this.activity = this.formCreate?.getRawValue();
-    this.service.createActivity(this.activity as ActivityItem);
-    this.router.navigateByUrl("activity");
+    if (this.formCreate?.valid){
+      this.activity = this.formCreate?.getRawValue();
+      this.service.createActivity(this.activity as ActivityItem);
+      this.router.navigateByUrl("activity");
+      console.log(this.activity);
+    }
   }
 
   public ngOnInit(): void {
     this.formCreate = this.fb.group({
-      id: this.fb.control("", Validators.required),
+      id: this.fb.control(this.service.getActivities().length + 1),
       name: this.fb.control("", Validators.required),
       description: this.fb.control("", Validators.required),
       time: this.fb.control("", Validators.required),
