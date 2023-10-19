@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { ActivitiesEditComponent } from "../activities-edit/activities-edit.component";
 import { ActivitiesService } from "../activities.service";
 import { ActivityItem } from "./activity";
 
@@ -9,7 +8,7 @@ import { ActivityItem } from "./activity";
 @Component({
   selector: "app-activity",
   standalone: true,
-  imports: [CommonModule, ActivitiesEditComponent],
+  imports: [CommonModule],
   templateUrl: "./activity.component.html",
   styleUrls: ["./activity.component.scss"]
 })
@@ -21,22 +20,12 @@ export class ActivityComponent {
   public activities: ActivityItem[] = [];  
 
   public selectActivity?: ActivityItem;
-  public mode: "DEFAULT" | "EDIT" = "DEFAULT";
 
 
   constructor(private readonly router: Router, private service: ActivitiesService){
     this.activities = this.service.getActivities();    
   }
-  
-  public done(): void{
-    if (this.mode === "DEFAULT"){
-      this.mode = "EDIT";
-    }
-    else {
-      this.mode = "DEFAULT";
-    }
-  }
-  
+    
   public delete(activity: ActivityItem): void {
     this.activities = this.activities.filter((n) => n.id !== activity.id);
   }
@@ -46,26 +35,8 @@ export class ActivityComponent {
   }
   
   public edit(activity: ActivityItem): void {
-    if (this.mode === "DEFAULT"){
-      this.mode = "EDIT";
-    }
-    else {
-      this.mode = "DEFAULT";
-    }
-    this.selectActivity = activity;
-  }
-
-  public updateActivity(event: ActivityItem): void{
-    this.activities = this.activities.map((activity) => {
-      if (activity.id === event.id) return event;
-      return activity;
-    });
-    if (this.mode === "DEFAULT"){
-      this.mode = "EDIT";
-    }
-    else {
-      this.mode = "DEFAULT";
-    }
+    this.router.navigateByUrl("edit");
+    this.service.activityItem(activity);
   }
 
 }

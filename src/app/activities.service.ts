@@ -6,6 +6,7 @@ import { ActivityItem } from "./activity/activity";
 })
 export class ActivitiesService {
   public activities: ActivityItem[] = [];
+  public activity?: ActivityItem;
 
   constructor(){ 
     this.loadData();
@@ -29,6 +30,21 @@ export class ActivitiesService {
   }
   public getActivities(): ActivityItem[]{
     return this.activities;
+  }
+
+  public activityItem(activitySet: ActivityItem): void{
+    this.activity = activitySet;
+  }
+
+  public getActivityEdit(): ActivityItem{
+    return this.activity as ActivityItem;
+  }
+
+  public updateActivity(event: ActivityItem): void{
+    this.activities = this.activities.map((activity) => {
+      if (activity.id === event.id) return event;
+        return activity;
+    });
   }
 
   
