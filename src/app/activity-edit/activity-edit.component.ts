@@ -15,7 +15,10 @@ export class ActivityEditComponent implements OnInit{
 
   public formEdit?: FormGroup;
 
-  constructor(private readonly router: Router,private service: ActivitiesService, private readonly fb: FormBuilder, private readonly route: ActivatedRoute){}
+  constructor(private readonly router: Router,
+    private service: ActivitiesService,
+    private readonly fb: FormBuilder,
+    private readonly route: ActivatedRoute){}
 
   public save(): void{
     this.service.updateActivity(this.formEdit?.getRawValue());
@@ -23,7 +26,8 @@ export class ActivityEditComponent implements OnInit{
   }
   
   public ngOnInit(): void {
-    const activity = this.service.getActivityEdit();
+    const id = parseInt(this.route.snapshot.paramMap.get("id") as string);
+    const activity = this.service.getActivityEdit(id);
         this.formEdit = this.fb.group({
           id: this.fb.control(activity.id, Validators.required),
           name: this.fb.control(activity.name, Validators.required),

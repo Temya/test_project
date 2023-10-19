@@ -36,8 +36,8 @@ export class ActivitiesService {
     this.activity = activitySet;
   }
 
-  public getActivityEdit(): ActivityItem{
-    return this.activity as ActivityItem;
+  public getActivityEdit(id: number): ActivityItem{
+    return this.activity = this.activities.find((activ) => { return activ.id === id;}) as ActivityItem;
   }
 
   public updateActivity(event: ActivityItem): void{

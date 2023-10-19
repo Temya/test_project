@@ -36,7 +36,7 @@ export class ActivityComponent {
   }
   
   public edit(activity: ActivityItem): void {
-    this.router.navigateByUrl("edit/:id");
+    this.router.navigateByUrl(`edit/${activity.id}`);
     this.service.activityItem(activity);
   }
 
