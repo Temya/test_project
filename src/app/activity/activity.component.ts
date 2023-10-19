@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ActivitiesService } from "../activities.service";
 import { ActivityItem } from "./activity";
 
@@ -36,7 +36,7 @@ export class ActivityComponent {
   }
   
   public edit(activity: ActivityItem): void {
-    this.router.navigateByUrl("edit");
+    this.router.navigateByUrl("edit/:id");
     this.service.activityItem(activity);
   }
 

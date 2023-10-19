@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ActivitiesService } from "../activities.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class ActivityEditComponent implements OnInit{
 
   public formEdit?: FormGroup;
 
-  constructor(private readonly router: Router,private service: ActivitiesService, private readonly fb: FormBuilder){}
+  constructor(private readonly router: Router,private service: ActivitiesService, private readonly fb: FormBuilder, private readonly route: ActivatedRoute){}
 
   public save(): void{
     this.service.updateActivity(this.formEdit?.getRawValue());
