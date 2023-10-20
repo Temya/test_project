@@ -39,7 +39,7 @@ export class LoginComponent implements OnDestroy {
       .subscribe((data) => {
         this.users = data.users;
         console.log(this.users);
-        cdr.detectChanges();
+        this.cdr.detectChanges();
       });
   }
 
@@ -65,18 +65,13 @@ export class LoginComponent implements OnDestroy {
   }
 
   public checkDataUser(): void{
-    for (let i = 0; i < this.users.length; i++){
-      if (this.users[i].firstName === this.login?.value)
-      {
-        if (this.users[i].password === this.password?.value)
-        {
-          this.router.navigateByUrl("activity");
-        }
-      }
-      else {
-        console.log("Invalid login or password");
-      }
+    if (this.users.find((us) => us.firstName === this.login?.value && us.password === this.password?.value)){
+      this.router.navigateByUrl("activity");
     }
+    else {
+      console.log("Invalid login or password");
+    }
+          
   }
 
 }
