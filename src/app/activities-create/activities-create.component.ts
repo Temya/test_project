@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ActivitiesService } from "../activities.service";
 import { ActivityItem } from "../activity/activity";
+import { ActivitiesService } from "../services/activities.service";
 
 @Component({
   selector: "app-activities-create",
@@ -11,7 +11,8 @@ import { ActivityItem } from "../activity/activity";
   imports: [CommonModule,
     ReactiveFormsModule],
   templateUrl: "./activities-create.component.html",
-  styleUrls: ["./activities-create.component.scss"]
+  styleUrls: ["./activities-create.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivitiesCreateComponent implements OnInit {
   public activity?: ActivityItem;

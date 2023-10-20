@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { ActivitiesService } from "../activities.service";
+import { ActivitiesService } from "../services/activities.service";
 import { ActivityItem } from "./activity";
 
 
@@ -10,7 +10,8 @@ import { ActivityItem } from "./activity";
   standalone: true,
   imports: [CommonModule],
   templateUrl: "./activity.component.html",
-  styleUrls: ["./activity.component.scss"]
+  styleUrls: ["./activity.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ActivityComponent {

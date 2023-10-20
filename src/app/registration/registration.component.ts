@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,7 +9,8 @@ import { Router } from "@angular/router";
   imports: [CommonModule,
   ReactiveFormsModule],
   templateUrl: "./registration.component.html",
-  styleUrls: ["./registration.component.scss"]
+  styleUrls: ["./registration.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationComponent {
 

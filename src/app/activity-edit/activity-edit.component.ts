@@ -1,15 +1,16 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ActivitiesService } from "../activities.service";
+import { ActivitiesService } from "../services/activities.service";
 
 @Component({
   selector: "app-activity-edit",
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: "./activity-edit.component.html",
-  styleUrls: ["./activity-edit.component.scss"]
+  styleUrls: ["./activity-edit.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityEditComponent implements OnInit{
 
