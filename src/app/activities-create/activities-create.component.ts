@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ActivityItem } from "../activity/activity";
+import { ActivityItem } from "../interface/activity";
 import { ActivitiesService } from "../services/activities.service";
 
 @Component({

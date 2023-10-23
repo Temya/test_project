@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { HttpClient, HttpClientModule, HttpHandler } from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
+import { UsersData } from "../interface/users-data";
 import { BackendService } from "../services/backend.service";
-import { UsersData } from "../users-data";
 
 @Component({
   selector: "app-login",
@@ -33,7 +33,11 @@ export class LoginComponent implements OnDestroy {
 
   private readonly unSubscribe$$ = new Subject<void>();
 
-  constructor(private readonly router: Router, private readonly fb: FormBuilder, private readonly service: BackendService, private cdr: ChangeDetectorRef){
+  constructor(private readonly router: Router,
+    private readonly fb: FormBuilder,
+    private readonly service: BackendService,
+    private cdr: ChangeDetectorRef
+  ){
     service.getUsers$()
       .pipe(takeUntil(this.unSubscribe$$))
       .subscribe((data) => {
@@ -64,8 +68,8 @@ export class LoginComponent implements OnDestroy {
     this.router.navigateByUrl("activ");
   }
 
-  public checkDataUser(): void{
-    if (this.users.find((us) => us.firstName === this.login?.value && us.password === this.password?.value)){
+  public checkDataUser(): void {
+    if (this.users.find((user) => user.firstName === this.login?.value && user.password === this.password?.value)){
       this.router.navigateByUrl("activity");
     }
     else {

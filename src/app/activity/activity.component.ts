@@ -1,8 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { ActivityItem } from "../interface/activity";
 import { ActivitiesService } from "../services/activities.service";
-import { ActivityItem } from "./activity";
 
 
 @Component({
