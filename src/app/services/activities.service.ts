@@ -14,6 +14,8 @@ export class ActivitiesService {
 
   public products: Product[] = [];
 
+  public searchProducts: Product[] = [];
+
   public product?: Product;
 
   public activity?: ActivityItem;
@@ -93,6 +95,10 @@ export class ActivitiesService {
 
   public activityDelete(activity: ActivityItem): void {
     this.activities = this.activities.filter((n) => n.id !== activity.id);
+  }
+
+  public createNewArray(word: string): Product[]{
+    return this.searchProducts = this.products.filter((n) => n.title === word || n.price === word || n.description === word || n.category === word || n.brand === word);
   }
 
 }

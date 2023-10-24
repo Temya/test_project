@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { Product } from "../interface/product";
@@ -24,6 +24,10 @@ export class ProductsComponent implements OnDestroy{
 
   public products: Product[] = [];
 
+  public word?: string;
+
+  public control = new FormControl("");
+
   private readonly unSubscribe$$ = new Subject<void>();
 
   constructor(private readonly router: Router,
@@ -43,6 +47,7 @@ export class ProductsComponent implements OnDestroy{
     else {
       this.products = productService.getProducts();
     }
+    this.control.valueChanges.subscribe((val) => this.word = val as string);
   }
  
   public ngOnDestroy(): void {
@@ -63,5 +68,13 @@ export class ProductsComponent implements OnDestroy{
   public edit(product: Product): void {
     this.router.navigateByUrl(`product-edit/${product.id}`);
     // this.service.activityItem(product);
+  }
+
+  public search(): void{
+    this.products = this.productService.createNewArray(this.word as string);
+  }
+
+  public backArray(): void{
+    this.products = this.productService.products;
   }
 }

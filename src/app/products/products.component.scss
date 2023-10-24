@@ -7,6 +7,10 @@
     border-radius: 20px;
 }
 
+
+.main:hover{
+	cursor: pointer;
+}
 .btn {
 	display: inline-block;	
 	box-sizing: border-box;
@@ -54,4 +58,9 @@ th {
   }
   tr:hover td {
 	background: #ccddff;
+  }
+
+  .search:hover{
+	background-color: black;
+	color: white;
   }
