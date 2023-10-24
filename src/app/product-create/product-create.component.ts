@@ -14,7 +14,6 @@ import { ActivitiesService } from "../services/activities.service";
     HttpClientModule],
   templateUrl: "./product-create.component.html",
   styleUrls: ["./product-create.component.scss"],
-  providers: [HttpClient, ActivitiesService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCreateComponent implements OnInit{
@@ -31,7 +30,7 @@ export class ProductCreateComponent implements OnInit{
     if (this.formCreate?.valid){
       this.product = this.formCreate?.getRawValue();
       this.service.createProduct(this.product as Product);
-      console.log(this.service.products);
+      console.log("Do" + this.service.getProducts());
       this.router.navigateByUrl("products");
     }
   }

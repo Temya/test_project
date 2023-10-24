@@ -1,4 +1,7 @@
+import { HttpClient } from "@angular/common/http";
 import { Routes } from "@angular/router";
+import { ActivitiesService } from "./services/activities.service";
+import { BackendService } from "./services/backend.service";
 
 export const appRoutes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "products"},
@@ -7,6 +10,6 @@ export const appRoutes: Routes = [
     {path: "register", loadComponent: () => import("./registration/registration.component").then((i) => i.RegistrationComponent)},
     {path: "edit/:id", loadComponent: () => import("./activity-edit/activity-edit.component").then((i) => i.ActivityEditComponent)},
     {path: "create", loadComponent: () => import("./activities-create/activities-create.component").then((i) => i.ActivitiesCreateComponent)},
-    {path: "products", loadComponent: () => import("./products/products.component").then((i) => i.ProductsComponent)},
+    {path: "products", loadComponent: () => import("./products/products.component").then((i) => i.ProductsComponent), providers: [HttpClient, BackendService, ActivitiesService]},
     {path: "product-create", loadComponent: () => import("./product-create/product-create.component").then((i) => i.ProductCreateComponent)}
 ];

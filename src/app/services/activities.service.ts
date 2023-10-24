@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { ChangeDetectorRef, Injectable, OnDestroy } from "@angular/core";
+import { ChangeDetectorRef, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { ActivityItem } from "../interface/activity"; 
@@ -8,7 +8,7 @@ import { Product } from "../interface/product";
 @Injectable({
   providedIn: "root",
 })
-export class ActivitiesService implements OnDestroy {
+export class ActivitiesService {
 
   public activities: ActivityItem[] = [];
 
@@ -24,18 +24,13 @@ export class ActivitiesService implements OnDestroy {
     private readonly http: HttpClient,
     private cdr: ChangeDetectorRef)
   { 
+    console.log(2);
     this.loadData();  
-  }
-
-  
-
-  public ngOnDestroy(): void {
-    this.unSubscribe$$.next();
-    this.unSubscribe$$.complete();
   }
 
   public saveProducts(items: Product[]): void{
     this.products = items;
+    console.log(this.products);
   }
 
   public getProducts(): Product[]{

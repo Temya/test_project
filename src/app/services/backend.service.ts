@@ -17,7 +17,7 @@ export class BackendService {
   }
 
   public getProducts$(): Observable<Products> {
-    const url = "/api/products?&ProductFileConfig.join()";
+    const url = `/api/products?&select=${ProductFileConfig.join(",")}`;
     return this.http.get<Products>(url, { withCredentials: true });
   }
 }

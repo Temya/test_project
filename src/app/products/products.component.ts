@@ -18,7 +18,6 @@ import { BackendService } from "../services/backend.service";
   ],
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.scss"],
-  providers: [HttpClient, BackendService, ActivitiesService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnDestroy{
@@ -31,18 +30,19 @@ export class ProductsComponent implements OnDestroy{
     private service: BackendService,
     private readonly fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private product: ActivitiesService)
+    private productService: ActivitiesService)
   {
-    if (!product.getProducts().length){
+    if (!productService.getProducts().length){
       this.service.getProducts$()
-      .pipe(takeUntil(this.unSubscribe$$))
-      .subscribe((data) => {
-        this.products = data.products;
-        product.saveProducts(this.products);
-        this.cdr.detectChanges();
-      });
+        .subscribe((data) => {
+          this.products = data.products;
+          productService.saveProducts(this.products);
+          this.cdr.detectChanges();
+        });
     }
-    this.products = product.getProducts();
+    else {
+      this.products = productService.getProducts();
+    }
   }
  
   public ngOnDestroy(): void {
@@ -52,13 +52,13 @@ export class ProductsComponent implements OnDestroy{
 
 
   public delete(product: Product): void {
-    this.product.deleteProduct(product);
-    this.products = this.product.getProducts();
+    this.productService.deleteProduct(product);
+    this.products = this.productService.getProducts();
   }
 
-  // public create(): void{
-  //   this.router.navigateByUrl("product-create");
-  // }
+  public create(): void{
+    this.router.navigateByUrl("product-create");
+  }
   
   // public edit(product: Products): void {
   //   // this.router.navigateByUrl(`edit/${product.id}`);
