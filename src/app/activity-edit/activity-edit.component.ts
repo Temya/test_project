@@ -40,31 +40,3 @@ export class ActivityEditComponent implements OnInit{
      
 
 }
-
-
-
-// @Component({
-//   selector: "app-activities-edit",
-//   standalone: true,
-//   imports: [CommonModule,
-//     ReactiveFormsModule],
-//   templateUrl: "./activities-edit.component.html",
-//   styleUrls: ["./activities-edit.component.scss"]
-// })
-// export class ActivitiesEditComponent implements OnInit {
-
-
-  
-  
-
-
-
-
-//   constructor(private readonly router: Router, ){}
-  
-//   
-
-//   public save(): void {
-//     this.activity = this.formEdit?.getRawValue();
-//     this.eventEmitter.emit(this.activity);
-//   }

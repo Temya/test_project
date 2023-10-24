@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { Subject } from "rxjs";
 import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
 import { BackendService } from "../services/backend.service";
@@ -60,8 +60,8 @@ export class ProductsComponent implements OnDestroy{
     this.router.navigateByUrl("product-create");
   }
   
-  // public edit(product: Products): void {
-  //   // this.router.navigateByUrl(`edit/${product.id}`);
-  //   // this.service.activityItem(product);
-  // }
+  public edit(product: Product): void {
+    this.router.navigateByUrl(`product-edit/${product.id}`);
+    // this.service.activityItem(product);
+  }
 }

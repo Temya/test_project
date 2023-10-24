@@ -17,7 +17,6 @@ import { BackendService } from "../services/backend.service";
   ],
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
-  providers: [HttpClient, BackendService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnDestroy {

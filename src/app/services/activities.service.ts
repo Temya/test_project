@@ -24,7 +24,6 @@ export class ActivitiesService {
     private readonly http: HttpClient,
     private cdr: ChangeDetectorRef)
   { 
-    console.log(2);
     this.loadData();  
   }
 
@@ -43,6 +42,17 @@ export class ActivitiesService {
 
   public deleteProduct(product: Product): void{
     this.products = this.products.filter((n) => n.id !== product.id);
+  }
+
+  public updateProduct(event: Product): void {
+    this.products = this.products.map((product) => {
+      if (product.id === event.id) return event;
+        return product;
+    });
+  }
+
+  public getProductEdit(id: number): Product {
+    return this.product = this.products.find((prod) => prod.id === id) as Product;
   }
 
 

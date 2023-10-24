@@ -22,7 +22,7 @@
            <td>{{item.price}}</td>
            <td>{{item.brand}}</td>
            <td>{{item.category}}</td>
-           <td><button class="btn">Edit</button></td>
+           <td><button class="btn" (click)="edit(item)">Edit</button></td>
            <td><button class="btn" (click)="delete(item)">Delete</button></td>
        </tr>
    </tbody>    

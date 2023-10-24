@@ -1,0 +1,23 @@
+<div *ngIf="formEdit" [formGroup]="formEdit">
+    <div class="text">
+        <h1>Title</h1>
+        <input type="text" formControlName="title">
+    </div>
+    <div class="text">
+        <h1>Description</h1>
+        <input type="text" formControlName="description">
+    </div>
+    <div class="text">
+        <h1>Price</h1>
+        <input type="text" formControlName="price">
+    </div>
+    <div class="text">
+        <h1>Brand</h1>
+        <input type="text" formControlName="brand">
+    </div>
+    <div class="text">
+        <h1>Category</h1>
+        <input type="text" formControlName="category">
+    </div>
+    <button class="btn" (click)="saveProduct()">Save</button>
+</div>
