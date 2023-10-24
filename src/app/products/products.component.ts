@@ -67,7 +67,6 @@ export class ProductsComponent implements OnDestroy{
   
   public edit(product: Product): void {
     this.router.navigateByUrl(`product-edit/${product.id}`);
-    // this.service.activityItem(product);
   }
 
   public search(): void{
