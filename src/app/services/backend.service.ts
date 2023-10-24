@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { ProductFileConfig, Products } from "../interface/products";
 import { UsersParams } from "../interface/users-params";
 
 @Injectable({
@@ -15,5 +16,10 @@ export class BackendService {
     return this.http.get<UsersParams>(url, { withCredentials: true });
   }
 
-  
+  public getProducts$(): Observable<Products> {
+    const url = "/api/products?&ProductFileConfig.join()";
+    return this.http.get<Products>(url, { withCredentials: true });
+  }
 }
+
+// /api/products?&select=id,title,description,price,brand,category

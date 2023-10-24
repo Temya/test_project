@@ -3,9 +3,10 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
-import { ProductsParams } from "../interface/products-params";
+import { Subject, takeUntil } from "rxjs";
+import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
+import { BackendService } from "../services/backend.service";
 
 @Component({
   selector: "app-products",
@@ -17,29 +18,31 @@ import { ActivitiesService } from "../services/activities.service";
   ],
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.scss"],
-  providers: [HttpClient, ActivitiesService],
+  providers: [HttpClient, BackendService, ActivitiesService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnDestroy{
 
-  public products: ProductsParams[] = [];
-
-  public sbj = new Subject<ProductsParams[]>();
+  public products: Product[] = [];
 
   private readonly unSubscribe$$ = new Subject<void>();
 
   constructor(private readonly router: Router,
-    private service: ActivitiesService,
+    private service: BackendService,
     private readonly fb: FormBuilder,
-    private cdr: ChangeDetectorRef)
+    private cdr: ChangeDetectorRef,
+    private product: ActivitiesService)
   {
-    if (this.products){
-      this.service.getProducts$().subscribe((data) => {
+    if (!product.getProducts().length){
+      this.service.getProducts$()
+      .pipe(takeUntil(this.unSubscribe$$))
+      .subscribe((data) => {
         this.products = data.products;
+        product.saveProducts(this.products);
         this.cdr.detectChanges();
       });
     }
-    this.service.products = this.products;
+    this.products = product.getProducts();
   }
  
   public ngOnDestroy(): void {
@@ -48,13 +51,14 @@ export class ProductsComponent implements OnDestroy{
   }
 
 
-  public delete(product: ProductsParams): void {
-    this.products = this.products.filter((n) => n.id !== product.id);
+  public delete(product: Product): void {
+    this.product.deleteProduct(product);
+    this.products = this.product.getProducts();
   }
 
-  public create(): void{
-    this.router.navigateByUrl("product-create");
-  }
+  // public create(): void{
+  //   this.router.navigateByUrl("product-create");
+  // }
   
   // public edit(product: Products): void {
   //   // this.router.navigateByUrl(`edit/${product.id}`);

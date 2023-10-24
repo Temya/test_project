@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ProductsParams } from "../interface/products-params";
+import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
 
 @Component({
@@ -19,7 +19,7 @@ import { ActivitiesService } from "../services/activities.service";
 })
 export class ProductCreateComponent implements OnInit{
 
-  public product?: ProductsParams;
+  public product?: Product;
 
   public formCreate?: FormGroup;
 
@@ -30,7 +30,7 @@ export class ProductCreateComponent implements OnInit{
   public addProduct(): void{
     if (this.formCreate?.valid){
       this.product = this.formCreate?.getRawValue();
-      this.service.createProduct(this.product as ProductsParams);
+      this.service.createProduct(this.product as Product);
       console.log(this.service.products);
       this.router.navigateByUrl("products");
     }

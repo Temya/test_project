@@ -1,10 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { ChangeDetectorRef, Injectable, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, Subject, takeUntil } from "rxjs";
-import { ActivityItem } from "../interface/activity";
-import { Products } from "../interface/products";
-import { ProductsParams } from "../interface/products-params";
+import { Subject } from "rxjs";
+import { ActivityItem } from "../interface/activity"; 
+import { Product } from "../interface/product";
 
 @Injectable({
   providedIn: "root",
@@ -13,9 +12,9 @@ export class ActivitiesService implements OnDestroy {
 
   public activities: ActivityItem[] = [];
 
-  public products: ProductsParams[] = [];
+  public products: Product[] = [];
 
-  public product?: ProductsParams;
+  public product?: Product;
 
   public activity?: ActivityItem;
 
@@ -35,23 +34,26 @@ export class ActivitiesService implements OnDestroy {
     this.unSubscribe$$.complete();
   }
 
-  public getProducts(): ProductsParams[]{
+  public saveProducts(items: Product[]): void{
+    this.products = items;
+  }
+
+  public getProducts(): Product[]{
     return this.products;
   }
 
-  public getProducts$(): Observable<Products> {
-    const url = "/api/products?&select=id,title,description,price,brand,category";
-    return this.http.get<Products>(url, { withCredentials: true });
+  public createProduct(product: Product): void{
+    this.products.push(product);
   }
+
+  public deleteProduct(product: Product): void{
+    this.products = this.products.filter((n) => n.id !== product.id);
+  }
+
 
   public createActivity(activity: ActivityItem): void {
     this.activities.push(activity);
   }
-
-  public createProduct(product: ProductsParams): void{
-    this.products.push(product);
-  }
-
 
   public loadData(): void{
     for (let i = 0; i < 10; i++){
