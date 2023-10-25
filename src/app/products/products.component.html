@@ -1,5 +1,5 @@
 <h1>LIST OF PRODUCTS</h1>
-<div><input type="text" [formControl]="control"></div>
+<div><input type="text" [formControl]="controlSearch"></div>
 <table class="items">
    <thead>
        <tr>
@@ -31,10 +31,11 @@
 <div><button class="btn" (click)="skipProductDown(page)">
     <
  </button>
- <label class="pagination">{{page}}</label>
+ <label class="pagination">{{page + 1}}</label>
  <button class="btn" (click)="skipProductUp(page)">
     >
- </button></div> 
+ </button>
+<input type="text" [formControl]="controlValue"></div> 
 <button class="btn" (click)="create()">
    Create new product
 </button> 

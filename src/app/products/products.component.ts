@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from
 import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
+import { PaginationData } from "../interface/pagination-data";
 import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
 import { BackendService } from "../services/backend.service";
@@ -23,12 +24,9 @@ import { BackendService } from "../services/backend.service";
 export class ProductsComponent implements OnDestroy{
 
   public products: Product[] = [];
-
-  public control = new FormControl("");
-
-  public page = 1;
-
-  public value = 0;
+  public controlSearch = new FormControl("");
+  public controlValue = new FormControl("");
+  public page = 0;
 
   private readonly unSubscribe$$ = new Subject<void>();
 
@@ -39,7 +37,12 @@ export class ProductsComponent implements OnDestroy{
     private productService: ActivitiesService)
   {
     if (!productService.getProducts().length){
-      this.service.getProducts$(0)
+      const body: PaginationData = {
+        limit: "10",
+        page: "0"
+      };
+      this.service.getProducts$(body)
+        .pipe(takeUntil(this.unSubscribe$$))
         .subscribe((data) => {
           this.products = data.products;
           productService.saveProducts(this.products);
@@ -49,9 +52,12 @@ export class ProductsComponent implements OnDestroy{
     else {
       this.products = productService.getProducts();
     }
-    this.control.valueChanges
+    this.controlSearch.valueChanges
       .pipe(takeUntil(this.unSubscribe$$))
-      .subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => this.products = data.products));
+      .subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => {
+        this.products = data.products;
+        this.cdr.detectChanges();
+      }));
   }
  
   public ngOnDestroy(): void {
@@ -78,27 +84,47 @@ export class ProductsComponent implements OnDestroy{
   }
 
   public skipProductUp(val: number): void{
-    this.value = ((val - 1)*10) + 10;
-    this.service.getProducts$(this.value)
+    const body: PaginationData = {
+      limit: "10",
+      page: "0"
+    };
+    this.controlValue.valueChanges
+    .pipe(takeUntil(this.unSubscribe$$))
+    .subscribe((n) => body.limit = n as string);
+    body.page = ((val*10) + 10).toLocaleString();
+    this.service.getProducts$(body)
       .subscribe((data) => {
          this.products = data.products;
          this.productService.saveProducts(this.products);
          this.cdr.detectChanges();
       });
-      this.page++;
+    this.page++;
   }
 
   public skipProductDown(val: number): void{
     if (val !== 0 || val !< 0)
     {
-      this.value = ((val - 1)*10) - 10;
-      this.page--;
-      this.service.getProducts$(this.value)
+      const body: PaginationData = {
+        limit: "10",
+        page: "0"
+      };
+      this.controlValue.valueChanges
+        .pipe(takeUntil(this.unSubscribe$$))
+        .subscribe((n) => body.limit = n as string);      
+      body.page = ((val*10) - 10).toLocaleString();
+      this.service.getProducts$(body)
       .subscribe((data) => {
         this.products = data.products;
         this.productService.saveProducts(this.products);
         this.cdr.detectChanges();
       });
+      this.page--;
     }    
   }
+
+  // this.controlValues.valueChanges
+  //     .pipe(takeUntil(this.unSubscribe$$))
+  //     .subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => {
+  //       this.products = data.products;
+  //       this.cdr.detectChanges();
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { PaginationData } from "../interface/pagination-data";
 import { ProductFileConfig, Products } from "../interface/products";
 import { UsersParams } from "../interface/users-params";
 
@@ -16,8 +17,8 @@ export class BackendService {
     return this.http.get<UsersParams>(url, { withCredentials: true });
   }
 
-  public getProducts$(val: number): Observable<Products> {
-    const url = `/api/products?limit=10&skip=${val}&select=${ProductFileConfig.join(",")}`;
+  public getProducts$(val: PaginationData): Observable<Products> {
+    const url = `/api/products?limit=${val.limit}&skip=${val.page}&select=${ProductFileConfig.join(",")}`;
     return this.http.get<Products>(url, { withCredentials: true });
   }
 
