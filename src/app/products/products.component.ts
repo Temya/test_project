@@ -52,8 +52,6 @@ export class ProductsComponent implements OnDestroy{
     this.control.valueChanges
       .pipe(takeUntil(this.unSubscribe$$))
       .subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => this.products = data.products));
-
-    // this.products.map((item) => ({id: item.id}))
   }
  
   public ngOnDestroy(): void {
@@ -81,7 +79,6 @@ export class ProductsComponent implements OnDestroy{
 
   public skipProductUp(val: number): void{
     this.value = ((val - 1)*10) + 10;
-    console.log(val);
     this.service.getProducts$(this.value)
       .subscribe((data) => {
          this.products = data.products;
@@ -96,14 +93,12 @@ export class ProductsComponent implements OnDestroy{
     {
       this.value = ((val - 1)*10) - 10;
       this.page--;
-      console.log(val);
-    }
-    this.service.getProducts$(this.value)
+      this.service.getProducts$(this.value)
       .subscribe((data) => {
         this.products = data.products;
         this.productService.saveProducts(this.products);
         this.cdr.detectChanges();
       });
-      
+    }    
   }
 }
