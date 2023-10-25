@@ -26,6 +26,10 @@ export class ProductsComponent implements OnDestroy{
 
   public control = new FormControl("");
 
+  public page = 1;
+
+  public value = 0;
+
   private readonly unSubscribe$$ = new Subject<void>();
 
   constructor(private readonly router: Router,
@@ -35,7 +39,7 @@ export class ProductsComponent implements OnDestroy{
     private productService: ActivitiesService)
   {
     if (!productService.getProducts().length){
-      this.service.getProducts$()
+      this.service.getProducts$(0)
         .subscribe((data) => {
           this.products = data.products;
           productService.saveProducts(this.products);
@@ -45,8 +49,10 @@ export class ProductsComponent implements OnDestroy{
     else {
       this.products = productService.getProducts();
     }
-    this.control.valueChanges.pipe(takeUntil(this.unSubscribe$$)).subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => this.products = data.products));
-    this.products = this.products.map((item) => ({id: item.id, title: item.title, description: item.description, category: item.category, brand: item.brand, price: item.price}));
+    this.control.valueChanges
+      .pipe(takeUntil(this.unSubscribe$$))
+      .subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => this.products = data.products));
+
     // this.products.map((item) => ({id: item.id}))
   }
  
@@ -71,5 +77,33 @@ export class ProductsComponent implements OnDestroy{
 
   public backArray(): void{
     this.products = this.productService.products;
+  }
+
+  public skipProductUp(val: number): void{
+    this.value = ((val - 1)*10) + 10;
+    console.log(val);
+    this.service.getProducts$(this.value)
+      .subscribe((data) => {
+         this.products = data.products;
+         this.productService.saveProducts(this.products);
+         this.cdr.detectChanges();
+      });
+      this.page++;
+  }
+
+  public skipProductDown(val: number): void{
+    if (val !== 0 || val !< 0)
+    {
+      this.value = ((val - 1)*10) - 10;
+      this.page--;
+      console.log(val);
+    }
+    this.service.getProducts$(this.value)
+      .subscribe((data) => {
+        this.products = data.products;
+        this.productService.saveProducts(this.products);
+        this.cdr.detectChanges();
+      });
+      
   }
 }
