@@ -20,6 +20,11 @@ export class BackendService {
     const url = `/api/products?&select=${ProductFileConfig.join(",")}`;
     return this.http.get<Products>(url, { withCredentials: true });
   }
+
+  public gerSearchProduct$(word: string): Observable<Products> {
+    const url = `/api/products/search?q=${word}`;
+    return this.http.get<Products>(url, { withCredentials: true});
+  }
 }
 
 // /api/products?&select=id,title,description,price,brand,category

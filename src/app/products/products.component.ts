@@ -3,7 +3,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
 import { BackendService } from "../services/backend.service";
@@ -23,8 +23,6 @@ import { BackendService } from "../services/backend.service";
 export class ProductsComponent implements OnDestroy{
 
   public products: Product[] = [];
-
-  public word?: string;
 
   public control = new FormControl("");
 
@@ -47,7 +45,9 @@ export class ProductsComponent implements OnDestroy{
     else {
       this.products = productService.getProducts();
     }
-    this.control.valueChanges.subscribe((val) => this.word = val as string);
+    this.control.valueChanges.pipe(takeUntil(this.unSubscribe$$)).subscribe((val) => service.gerSearchProduct$(val as string).subscribe((data) => this.products = data.products));
+    this.products = this.products.map((item) => ({id: item.id, title: item.title, description: item.description, category: item.category, brand: item.brand, price: item.price}));
+    // this.products.map((item) => ({id: item.id}))
   }
  
   public ngOnDestroy(): void {
@@ -67,10 +67,6 @@ export class ProductsComponent implements OnDestroy{
   
   public edit(product: Product): void {
     this.router.navigateByUrl(`product-edit/${product.id}`);
-  }
-
-  public search(): void{
-    this.products = this.productService.createNewArray(this.word as string);
   }
 
   public backArray(): void{
