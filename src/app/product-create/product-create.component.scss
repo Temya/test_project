@@ -1,6 +1,4 @@
 :host {
-    width: 500px;
-    height: 600px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -8,12 +6,22 @@
     background-color: antiquewhite;
     border-radius: 20px;
 }
+.mainForm{
+	align-content: center;
+}
 .text {
     display: flex;
     width: 100%;
-    align-items: flex-start;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+}
+.second{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
 }
 .btn {
 	display: inline-block;	

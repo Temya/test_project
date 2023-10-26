@@ -54,9 +54,18 @@ export class ProductCreateComponent implements OnInit{
 
   public addInformation(): void {
     const informationForm = this.fb.group({
-      availability: ["", Validators.required],
-      production: ["", Validators.required],
-      guarantee: ["", Validators.required]
+      availability: this.fb.control("", Validators.required),
+      production: this.fb.control("", Validators.required),
+      guarantee: this.fb.control("", Validators.required)
+    });
+    this.information.push(informationForm);
+  }
+
+  public getInformationGroup(): FormGroup{
+    return this.fb.group({
+      availability: this.fb.control("", Validators.required),
+      production: this.fb.control("", Validators.required),
+      guarantee: this.fb.control("", Validators.required)
     });
   }
   

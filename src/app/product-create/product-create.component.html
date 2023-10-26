@@ -1,27 +1,30 @@
 <div *ngIf="formCreate" [formGroup]="formCreate">
-    <div class="text">
-        <h1>Title</h1>
-        <input type="text" formControlName="title">
+    <div class="mainForm">
+        <div class="text">
+            <h1>Title</h1>
+            <input type="text" formControlName="title">
+        </div>
+        <div class="text">
+            <h1>Description</h1>
+            <input type="text" formControlName="description">
+        </div>
+        <div class="text">
+            <h1>Price</h1>
+            <input type="text" formControlName="price">
+        </div>
+        <div class="text">
+            <h1>Brand</h1>
+            <input type="text" formControlName="brand">
+        </div>
+        <div class="text">
+         <h1>Category</h1>
+            <input type="text" formControlName="category">
+        </div>
+        <div>
     </div>
-    <div class="text">
-        <h1>Description</h1>
-        <input type="text" formControlName="description">
-    </div>
-    <div class="text">
-        <h1>Price</h1>
-        <input type="text" formControlName="price">
-    </div>
-    <div class="text">
-        <h1>Brand</h1>
-        <input type="text" formControlName="brand">
-    </div>
-    <div class="text">
-        <h1>Category</h1>
-        <input type="text" formControlName="category">
-    </div>
-    <div formArrayName="information">
-        <div *ngFor="let informationForm of information.controls; let i = index">
-            <div [formGroup]="informationForm">
+    <h1 class="text">Information</h1>
+        <div *ngFor="let informationForm of information.controls; let i = index" formArrayName="information">
+            <div>
                 <label><input type="text" formControlName="availability">Availability</label>
                 <label><input type="text" formControlName="production">Production</label>
                 <label><input type="text" formControlName="guarantee">Guarantee</label>
@@ -29,5 +32,8 @@
             <button class="btn" (click)="deleteInformation(i)">Delete</button>
         </div>
     </div>
-    <button class="btn" (click)="addInformation()">Add</button>
-    <button class="btn" (click)="addProduct()">Save</button>
+    <div class="second">
+        <button class="btn" (click)="addInformation()">Add</button>
+        <button class="btn" (click)="addProduct()">Save</button>
+    </div>    
+</div>
