@@ -26,9 +26,11 @@
 .colum{
 	display: flex;
 	width: 100%;
-	align-items: center;
+	align-items: flex-start;
+	margin-left: 5px;
 	justify-content: center;
 	flex-direction: column;
+	gap: 8px;
 }
 .btn {
 	display: inline-block;	

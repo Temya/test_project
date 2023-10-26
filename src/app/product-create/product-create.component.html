@@ -1,8 +1,9 @@
 <div *ngIf="formCreate" [formGroup]="formCreate">
     <div class="mainForm">
         <div class="text">
+            <p>To day is {{date | date:"MMM dd, yyyy 'at' hh:mm a"}}</p>
             <h1>Title</h1>
-            <input type="text" formControlName="title">
+            <input #ch type="text" formControlName="title">
         </div>
         <div class="text">
             <h1>Description</h1>
@@ -25,9 +26,9 @@
     <h1 class="text">Information</h1>
         <div *ngFor="let informationForm of information.controls; let i = index" formArrayName="information">
             <div class="colum" [formGroup]="AbstractToForm(informationForm)">
-                <label><input type="text" formControlName="availability">Availability</label>
-                <label><input type="text" formControlName="production">Production</label>
-                <label><input type="text" formControlName="guarantee">Guarantee</label>
+                <label><input type="text" formControlName="availability"> Availability</label>
+                <label><input type="text" formControlName="production"> Production</label>
+                <label><input type="text" formControlName="guarantee"> Guarantee</label>
             </div>   
             <button class="btn" (click)="deleteInformation(i)">Delete</button>
         </div>
@@ -35,5 +36,6 @@
     <div class="second">
         <button class="btn" (click)="addInformation()">Add</button>
         <button class="btn" (click)="addProduct()">Save</button>
+        <button class="btn" (click)="change()">change</button>
     </div>    
 </div>

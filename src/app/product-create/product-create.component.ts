@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Product } from "../interface/product";
@@ -18,9 +18,11 @@ import { ActivitiesService } from "../services/activities.service";
 })
 export class ProductCreateComponent implements OnInit{
 
+  @ViewChild("ch") public child!: ElementRef<HTMLInputElement>;
   public product?: Product;
-
   public formCreate?: FormGroup;
+  public date: Date = new Date();
+
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder, private service: ActivitiesService){
 
@@ -75,5 +77,9 @@ export class ProductCreateComponent implements OnInit{
   
   public deleteInformation(informationIndex: number): void {
     this.information.removeAt(informationIndex);
+  }
+
+  public change(): void{
+    this.child.nativeElement.value = "123";
   }
 }
