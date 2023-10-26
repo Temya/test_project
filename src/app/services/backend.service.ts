@@ -18,6 +18,8 @@ export class BackendService {
   }
 
   public getProducts$(val: PaginationData): Observable<Products> {
+    if (val.limit === "0" || val.limit === "")
+      { val.limit = "10";}
     const url = `/api/products?limit=${val.limit}&skip=${val.page}&select=${ProductFileConfig.join(",")}`;
     return this.http.get<Products>(url, { withCredentials: true });
   }

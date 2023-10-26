@@ -61,7 +61,13 @@ export class ProductsComponent implements OnDestroy{
       }));
     this.controlValue.valueChanges
       .pipe(takeUntil(this.unSubscribe$$))
-      .subscribe((val) => {body.limit = val as string; this.limit = val as string; service.getProducts$(body).subscribe((data) => {this.products = data.products; this.cdr.detectChanges();}); console.log(body.limit);});
+      .subscribe((val) => {body.limit = val as string;
+        this.limit = val as string;
+        this.page = 0;
+        service.getProducts$(body)
+          .subscribe((data) => {this.products = data.products;
+            this.cdr.detectChanges();});
+        console.log(body.limit);});
   }
  
   public ngOnDestroy(): void {
@@ -92,10 +98,7 @@ export class ProductsComponent implements OnDestroy{
       limit: this.limit,
       page: this.page
     };
-    this.controlValue.valueChanges
-    .pipe(takeUntil(this.unSubscribe$$))
-    .subscribe((n) => body.limit = n as string);
-    body.page = ((val*10) + 10);
+    body.page = ((val*parseInt(this.limit)) + parseInt(this.limit));
     this.service.getProducts$(body)
       .subscribe((data) => {
          this.products = data.products;
@@ -111,11 +114,8 @@ export class ProductsComponent implements OnDestroy{
       const body: PaginationData = {
         limit: this.limit,
         page: this.page
-      };
-      this.controlValue.valueChanges
-        .pipe(takeUntil(this.unSubscribe$$))
-        .subscribe((n) => body.limit = n as string);      
-      body.page = ((val*10) - 10);
+      };     
+      body.page = ((val*parseInt(this.limit)) - parseInt(this.limit));
       this.service.getProducts$(body)
       .subscribe((data) => {
         this.products = data.products;
