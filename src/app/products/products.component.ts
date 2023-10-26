@@ -27,6 +27,7 @@ export class ProductsComponent implements OnDestroy{
   public controlSearch = new FormControl("");
   public controlValue = new FormControl("");
   public page = 0;
+  public limit = "10";
 
   private readonly unSubscribe$$ = new Subject<void>();
 
@@ -36,11 +37,11 @@ export class ProductsComponent implements OnDestroy{
     private cdr: ChangeDetectorRef,
     private productService: ActivitiesService)
   {
-    if (!productService.getProducts().length){
-      const body: PaginationData = {
-        limit: "10",
-        page: "0"
-      };
+    const body: PaginationData = {
+      limit: this.limit,
+      page: this.page
+    };
+    if (!productService.getProducts().length){     
       this.service.getProducts$(body)
         .pipe(takeUntil(this.unSubscribe$$))
         .subscribe((data) => {
@@ -58,6 +59,9 @@ export class ProductsComponent implements OnDestroy{
         this.products = data.products;
         this.cdr.detectChanges();
       }));
+    this.controlValue.valueChanges
+      .pipe(takeUntil(this.unSubscribe$$))
+      .subscribe((val) => {body.limit = val as string; this.limit = val as string; service.getProducts$(body).subscribe((data) => {this.products = data.products; this.cdr.detectChanges();}); console.log(body.limit);});
   }
  
   public ngOnDestroy(): void {
@@ -85,13 +89,13 @@ export class ProductsComponent implements OnDestroy{
 
   public skipProductUp(val: number): void{
     const body: PaginationData = {
-      limit: "10",
-      page: "0"
+      limit: this.limit,
+      page: this.page
     };
     this.controlValue.valueChanges
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((n) => body.limit = n as string);
-    body.page = ((val*10) + 10).toLocaleString();
+    body.page = ((val*10) + 10);
     this.service.getProducts$(body)
       .subscribe((data) => {
          this.products = data.products;
@@ -105,13 +109,13 @@ export class ProductsComponent implements OnDestroy{
     if (val !== 0 || val !< 0)
     {
       const body: PaginationData = {
-        limit: "10",
-        page: "0"
+        limit: this.limit,
+        page: this.page
       };
       this.controlValue.valueChanges
         .pipe(takeUntil(this.unSubscribe$$))
         .subscribe((n) => body.limit = n as string);      
-      body.page = ((val*10) - 10).toLocaleString();
+      body.page = ((val*10) - 10);
       this.service.getProducts$(body)
       .subscribe((data) => {
         this.products = data.products;

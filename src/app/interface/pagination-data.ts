@@ -1,4 +1,4 @@
 export interface PaginationData {
-    page: string,
+    page: number,
     limit: string
 }
