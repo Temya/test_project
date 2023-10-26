@@ -19,5 +19,15 @@
         <h1>Category</h1>
         <input type="text" formControlName="category">
     </div>
+    <div formArrayName="information">
+        <div *ngFor="let informationForm of information.controls; let i = index">
+            <div [formGroup]="informationForm">
+                <label><input type="text" formControlName="availability">Availability</label>
+                <label><input type="text" formControlName="production">Production</label>
+                <label><input type="text" formControlName="guarantee">Guarantee</label>
+            </div>   
+            <button class="btn" (click)="deleteInformation(i)">Delete</button>
+        </div>
+    </div>
+    <button class="btn" (click)="addInformation()">Add</button>
     <button class="btn" (click)="addProduct()">Save</button>
-</div>

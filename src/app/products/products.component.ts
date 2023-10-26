@@ -104,7 +104,7 @@ export class ProductsComponent implements OnDestroy{
          this.products = data.products;
          this.productService.saveProducts(this.products);
          this.cdr.detectChanges();
-      });
+    });
     this.page++;
   }
 
