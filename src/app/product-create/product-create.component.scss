@@ -19,9 +19,16 @@
 .second{
 	display: flex;
 	width: 100%;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	flex-direction: row;
+}
+.colum{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 .btn {
 	display: inline-block;	

@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Product } from "../interface/product";
 import { ActivitiesService } from "../services/activities.service";
@@ -30,6 +30,10 @@ export class ProductCreateComponent implements OnInit{
     return this.formCreate?.controls["information"] as FormArray;
   }
 
+  public AbstractToForm(control: AbstractControl): FormGroup{
+    return control as FormGroup;
+  }
+
   public addProduct(): void{
     if (this.formCreate?.valid){
       this.product = this.formCreate?.getRawValue();
@@ -48,7 +52,7 @@ export class ProductCreateComponent implements OnInit{
       price: this.fb.control("", Validators.required),
       brand: this.fb.control("", Validators.required),
       category: this.fb.control("", Validators.required),
-      information: this.fb.array([])
+      information: this.fb.array([this.getInformationGroup()])
     }); 
   }
 

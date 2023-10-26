@@ -24,7 +24,7 @@
     </div>
     <h1 class="text">Information</h1>
         <div *ngFor="let informationForm of information.controls; let i = index" formArrayName="information">
-            <div>
+            <div class="colum" [formGroup]="AbstractToForm(informationForm)">
                 <label><input type="text" formControlName="availability">Availability</label>
                 <label><input type="text" formControlName="production">Production</label>
                 <label><input type="text" formControlName="guarantee">Guarantee</label>
